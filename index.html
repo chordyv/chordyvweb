@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ChordyV — Chord Chart Made Simple</title>
+  <meta name="description" content="Transpose instantly, auto-scroll, fullscreen mode, and an organized Library & Setlist. Focus on your performance." />
+  <meta property="og:title" content="ChordyV — Chord Chart Made Simple" />
+  <meta property="og:description" content="Transpose instantly, auto-scroll, fullscreen mode, and an organized Library & Setlist." />
+  <meta property="og:image" content="assets/og-image.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0e4fd1" />
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{--bg:#0F52D6;--bg-deep:#0B3FB2;--ink:#0b1b37;--ink-soft:#3b4b6b;--paper:#ffffff;--accent:#75E1FF;--maxw:1200px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";color:var(--ink);background:#f7f9fd;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--maxw);margin-inline:auto;padding:clamp(16px,3vw,24px)}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border-bottom:1px solid #eaf0ff}
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
+    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--bg),var(--bg-deep));box-shadow:0 6px 16px rgba(0,0,0,.18)}
+    .menu{display:flex;gap:18px;align-items:center}
+    .menu a{padding:10px 12px;border-radius:10px}
+    .menu a:hover{background:#eef4ff}
+    .mobile-toggle{display:none}
+
+    /* Hero */
+    .hero{background:radial-gradient(1200px 600px at 10% 10%,#6aa8ff33,transparent),linear-gradient(160deg,var(--bg),var(--bg-deep));color:var(--paper)}
+    .hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(20px,3vw,40px);align-items:center;min-height:520px}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;font-size:12px;letter-spacing:.4px}
+    h1{margin:10px 0 12px;font-size:clamp(28px,4.2vw,52px);line-height:1.1}
+    .lead{margin:0 0 20px;font-size:clamp(15px,1.7vw,18px);opacity:.95}
+    .cta{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;font-weight:650;border:1px solid transparent;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+    .btn-primary{background:var(--paper);color:var(--ink)}
+    .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+
+   /* HERO image without extra frame */
+.hero-shot{
+  width: clamp(300px, 60vw, 560px);
+  margin-inline: auto;
+}
+.hero-shot img{
+  display:block;
+  width:100%;
+  height:auto;           /* pakai rasio asli gambarmu */
+  border-radius:16px;    /* sudut halus saja */
+  box-shadow: 0 16px 40px rgba(0,0,0,.25); /* biar tetap pop */
+}
+    section{padding:clamp(48px,8vw,96px) 0}
+    .section-title{font-size:clamp(22px,3.2vw,36px);margin:0 0 10px}
+    .muted{color:var(--ink-soft)}
+
+    .grid{display:grid;gap:20px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .card{background:#fff;border:1px solid #eaf0ff;border-radius:16px;padding:18px 18px 16px;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+    .chip{display:inline-flex;align-items:center;gap:8px;font-size:12px;padding:6px 10px;border-radius:999px;background:#eef6ff;color:#0a3fa8;font-weight:600;border:1px solid #d9e7ff}
+    .card h3{margin:10px 0 6px;font-size:18px}
+
+    /* Google Play-like gallery */
+    .shots{display:flex;gap:20px;overflow-x:auto;padding:10px 0;scroll-snap-type:x mandatory}
+    .shot{flex:0 0 auto;width:240px;border-radius:12px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.12);scroll-snap-align:start}
+    .shot img{width:100%;height:auto;object-fit:contain;background:#fff;padding:8px;border-radius:12px}
+
+    .why{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+    .why .item{background:#fff;border:1px solid #eaf0ff;border-radius:16px;padding:18px;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+
+    .download{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:#111;color:#fff;font-weight:600}
+    .badge .small{font-weight:400;font-size:12px;opacity:.8}
+
+    footer{padding:28px 0;border-top:1px solid #eaf0ff;color:var(--ink-soft);font-size:14px}
+    html{scroll-behavior:smooth}
+
+    @media (max-width:900px){.hero .wrap{grid-template-columns:1fr;text-align:center}.grid.cols-3{grid-template-columns:1fr 1fr}.why{grid-template-columns:1fr}}
+    @media (max-width:640px){.menu{display:none;position:absolute;right:16px;top:64px;background:#fff;border:1px solid #dbe7ff;border-radius:12px;padding:12px;box-shadow:0 10px 24px rgba(0,0,0,.12)}
+      .menu a{display:block;padding:10px 12px;border-radius:8px}.menu a:hover{background:#eef4ff}
+      .mobile-toggle{display:inline-flex;padding:10px 12px;border:1px solid #dbe7ff;border-radius:10px;background:#fff}
+      .menu.open{display:block} .grid.cols-3{grid-template-columns:1fr}}
+.logo-img{
+  width:36px;      /* kecilin tampilan */
+  height:36px;
+  border-radius:10px;      /* biar agak rounded */
+  object-fit:contain;      /* supaya nggak gepeng */
+}
+.shot{
+  display:flex;
+  align-items:center;   /* vertikal center */
+  justify-content:center; /* horizontal center */
+  min-width: min(260px, 45vw);
+  height: 420px;         /* kasih tinggi fix biar rapi */
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid #eaf0ff;
+  box-shadow:var(--shadow-soft);
+  background:#fff;
+}
+
+.shot img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;   /* biar gak kepotong */
+}
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">
+  <img src="assets/logochordyv.png" alt="ChordyV Logo" class="logo-img">
+  ChordyV
+</div>
+    <nav class="menu" id="menu">
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#download">Download</a>
+      <a href="#faq">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <button class="mobile-toggle" id="menuBtn" aria-label="Open menu">Menu</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container wrap">
+    <div>
+      <span class="eyebrow">All-in-one chord companion</span>
+      <h1>Chord Chart Made Simple</h1>
+      <p class="lead">Transpose instantly, auto-scroll, fullscreen view, and an organized Library & Setlist — so you can focus on your performance.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#download">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="#features">See Features</a>
+      </div>
+    </div>
+   <div class="hero-shot" aria-label="App mockup">
+  <img src="assets/fullscreenmockup.png" alt="App on tablet" loading="lazy" />
+</div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <h2 class="section-title">Everything you need for performance, composing, and organization</h2>
+    <p class="muted">Built for musicians: fast, readable, and stage-ready.</p>
+    <div class="card" style="margin-top:18px">
+      <span class="chip">Perform & Display</span>
+      <div class="grid cols-3" style="margin-top:12px">
+        <div><h3>Transpose Instantly</h3><p>Change keys in one tap — no manual retyping.</p></div>
+        <div><h3>Resize Fonts</h3><p>Adjust text size for any stage lighting.</p></div>
+        <div><h3>Sharps ⇄ Flats</h3><p>Switch ♯ to ♭ (and vice versa) to fit your preference.</p></div>
+        <div><h3>Fullscreen Mode</h3><p>Distraction-free view that's easy to read from afar.</p></div>
+        <div><h3>Auto-Scroll</h3><p>Hands-free scrolling with adjustable speed.</p></div>
+      </div>
+    </div>
+    <div class="card"><span class="chip">Compose & Arrange</span>
+      <div class="grid cols-3" style="margin-top:12px">
+        <div><h3>Set Title, Key & Beat</h3><p>Start a song with clean metadata for your band.</p></div>
+        <div><h3>Add Chords & Sections</h3><p>Lay out intro, verses, chorus, bridge — clearly.</p></div>
+        <div><h3>Build Your Arrangement</h3><p>Order parts for rehearsal and live performance.</p></div>
+      </div>
+    </div>
+    <div class="card"><span class="chip">Library & Setlist</span>
+      <div class="grid cols-3" style="margin-top:12px">
+        <div><h3>Store Your Songs</h3><p>Keep every chart tidy in one place.</p></div>
+        <div><h3>Folders & Genres</h3><p>Create setlists for gigs, practice, or styles.</p></div>
+        <div><h3>Quick Sort & Filter</h3><p>Find charts fast by Key or Folder.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="screenshots" style="background:#f2f6ff">
+  <div class="container">
+    <h2 class="section-title">Screenshots</h2>
+    <p class="muted">Phone portrait and tablet landscape supported.</p>
+    <div class="shots" aria-label="Screenshots carousel">
+      <figure class="shot"><img loading="lazy" src="assets/librarymockup.png" alt="Library mockup" width="1024" height="1536"/></figure>
+      <figure class="shot"><img loading="lazy" src="assets/editormockup.png" alt="Editor mockup" width="1024" height="1536"/></figure>
+      <figure class="shot"><img loading="lazy" src="assets/performancemockup.png" alt="Performance mockup" width="1024" height="1536"/></figure>
+      <figure class="shot"><img loading="lazy" src="assets/fullscreenmockup.png" alt="Fullscreen mockup" width="1024" height="1536"/></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="section-title">Why it’s better</h2>
+    <div class="why">
+      <div class="item"><h4>Faster than manual</h4><p>Transposition and formatting are instant — no more rewriting charts from scratch.</p></div>
+      <div class="item"><h4>Cleaner on stage</h4><p>Fullscreen view with adjustable fonts keeps your chart readable under any lighting.</p></div>
+      <div class="item"><h4>Organized for real gigs</h4><p>Library, Folders, and Setlists streamline rehearsals all the way to performance.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="container">
+    <h2 class="section-title">Get ChordyV</h2>
+    <p class="muted">Available on Google Play. Web demo coming soon.</p>
+    <div class="download">
+      <a class="badge" href="#" aria-label="Google Play"><span class="small">GET IT ON</span> Google Play</a>
+      <a class="btn" style="border:1px solid #dbe7ff" href="#screenshots">See Screenshots</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <h2 class="section-title">FAQ</h2>
+    <details><summary>Can I mix portrait phone and landscape tablet screenshots on Google Play?</summary><p>Yes. Different sizes are accepted as long as they follow the resolution/ratio rules. Google Play will scale them to fit your listing.</p></details>
+    <details><summary>Does the app support sharps and flats?</summary><p>Absolutely. You can switch between ♯ and ♭ display at any time.</p></details>
+    <details><summary>Can I use fullscreen and auto-scroll together?</summary><p>Yes — that's the recommended setup for live performance.</p></details>
+    <details><summary>Is there a library and setlist feature?</summary><p>Yes. Store all songs in one place, organize by folders/genres, and sort quickly by key or folder.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+   <div class="brand">
+  <img src="assets/logochordyv.png" alt="ChordyV Logo" class="logo-img">
+  ChordyV
+</div>
+    <div>© <span id="y"></span> ChordyV. All rights reserved · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('menu');
+  btn?.addEventListener('click', ()=> menu.classList.toggle('open'));
+  menu?.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> menu.classList.remove('open')));
+  // Year
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+
+<!-- SEO structured data -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ChordyV","applicationCategory":"Music","operatingSystem":"Android, Web","description":"Transpose instantly, auto-scroll, fullscreen view, and organized Library & Setlist.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://chordyv.pages.dev"}
+</script>
+</body>
+</html>
