@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ChordyV – User Guide</title>
+  <meta name="description" content="A friendly guide to write, transpose, and perform chord charts with ChordyV." />
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+
+    :root{--bg:#0F52D6;--bg-deep:#0B3FB2;--ink:#0b1b37;--ink-soft:#3b4b6b;--paper:#ffffff;--accent:#75E1FF;--maxw:1200px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";color:var(--ink);background:#f7f9fd;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--maxw);margin-inline:auto;padding:clamp(12px,3vw,20px)}
+/* removed conflicting header .container */
+    header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border-bottom:1px solid #eaf0ff}
+    .nav{display:flex;align-items:center;justify-content: flex-end;margin:0 auto;width:100%}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;margin-right:0}
+    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--bg),var(--bg-deep));box-shadow:0 6px 16px rgba(0,0,0,.18)}
+    .menu{display:flex;gap:18px;align-items:center;margin-left:0}
+    .menu a{padding:10px 12px;border-radius:10px}
+    .menu a:hover{background:#eef4ff}
+    .menu .active{background:#eef4ff}
+    .hero{background:radial-gradient(1200px 600px at 10% 10%,#6aa8ff33,transparent),linear-gradient(160deg,var(--bg),var(--bg-deep));color:#fff}
+    .hero .wrap{display:grid;grid-template-columns:1fr;min-height:auto}
+    h1{margin:10px 0 12px;font-size:clamp(26px,4vw,44px);line-height:1.12}
+    .lead{margin:0 0 6px;opacity:.95}
+    .page{display:grid;grid-template-columns:260px 1fr;gap:20px}
+    @media (max-width:900px){.nav{justify-content:flex-end}.brand{margin-right:0}.menu{margin-left:0}.page{grid-template-columns:1fr}
+  .toc{position:static;top:auto;align-self:auto}
+}
+    .toc{position:static;top:auto;align-self:auto}
+    .toc .box{background:#fff;border:1px solid #eaf0ff;border-radius:16px;padding:14px;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+    .toc h3{margin:4px 0 8px;font-size:14px;color:#355}
+    .toc a{display:block;padding:6px 8px;border-radius:10px;color:#0b1b37}
+    .toc a:hover{background:#eef4ff}
+    section.card{background:#fff;border:1px solid #eaf0ff;border-radius:16px;padding:18px 18px 16px;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+    .section-title{font-size:clamp(20px,2.8vw,28px);margin:0 0 6px}
+    h3{margin:12px 0 6px;font-size:18px}
+    ul{padding-left:18px;margin:8px 0}
+    pre{background:#fff;border:1px solid #eaf0ff;border-left:4px solid #0F52D6;border-radius:12px;padding:12px;overflow:auto;font-family:ui-monospace,Menlo,Consolas,monospace}
+    .note{background:#eef6ff;border:1px solid #d9e7ff;border-left:4px solid #0B3FB2;border-radius:12px;padding:12px;margin-top:10px}
+    footer{padding:28px 0;border-top:1px solid #eaf0ff;color:#3b4b6b;font-size:14px;margin-top:24px}
+    html{scroll-behavior:smooth}
+  
+</style>
+<style>
+/* Header width == content width */
+header .container{
+  max-width: var(--maxw) !important;
+  padding-inline: clamp(12px,3vw,20px) !important; /* samakan dengan .container */
+}
+
+/* Header tetap rata kanan */
+header .nav{ display:flex !important; justify-content:flex-end !important; align-items:center; }
+header .brand{ margin-right:0 !important; }
+header .menu{ margin-left:0 !important; }
+
+/* (opsional) kalau masih ada rule lama, hapus/override:
+   .nav { justify-content:flex-start; }
+   .brand { margin-right:auto; }
+   .menu { margin-left:auto; }
+   header .container { max-width:100%; } */
+</style>
+<style>
+
+/* === NAYA RESPONSIVE CLEANUP === */
+/* Make all main containers align and center to the same column */
+.container{
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(12px,3vw,20px);
+}
+
+/* Ensure header/hero/footer use the same container rules */
+header .container,
+.hero .container,
+footer .container{
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(12px,3vw,20px);
+}
+
+/* Desktop: keep sidebar grid inside the same container so edges align */
+@media (min-width: 901px){
+  .page{ display:grid; grid-template-columns: 260px 1fr; gap: 20px; }
+}
+
+/* Mobile: collapse to one column and keep consistent paddings */
+@media (max-width: 900px){
+  .page{ display:block; }
+  .toc{ position: static; top: auto; align-self: auto; }
+  /* Keep spacing tidy on small screens */
+  .hero .container,
+  header .container,
+  main .container,
+  footer .container{
+    padding-inline: clamp(12px,5vw,20px);
+  }
+}
+
+/* Minor polish */
+.hero .wrap{ grid-template-columns: 1fr; min-height: auto; }
+.nav{ justify-content: space-between; }
+/* === END NAYA RESPONSIVE CLEANUP === */
+
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <div class="brand"><div class="logo" aria-hidden="true"></div>ChordyV</div>
+    <nav class="menu">
+      <a href="/">Home</a>
+      <a class="active" href="/guide">User Guide</a>
+      <a href="/faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="container wrap">
+    <div>
+      <span class="eyebrow" style="display:inline-flex;gap:8px;align-items:center;padding:6px 10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;font-size:12px;letter-spacing:.4px">Friendly Help</span>
+      <h1>ChordyV – User Guide</h1>
+      <p class="lead">Write clean chord charts, change the key in a tap, and perform in fullscreen — all in one place.</p>
+    </div>
+  </div>
+</section>
+<main class="container page" id="guide">
+  <aside class="toc">
+    <div class="box">
+      <h3>On this page</h3>
+      <a href="#start">1. Getting Started</a>
+      <a href="#write">2. Writing Charts</a>
+      <a href="#transpose">3. Transpose</a>
+      <a href="#recognize">4. Lines & Colors</a>
+      <a href="#perform">5. Performance</a>
+      <a href="#library">6. Library</a>
+      <a href="#best">7. Best Practices</a>
+      <a href="#examples">8. Examples</a>
+      <a href="#limits">9. Limitations</a>
+      <a href="#faq">10. FAQ</a>
+    </div>
+  </aside>
+  <div>
+    <section id="start" class="card">
+      <h2 class="section-title">1) Getting Started</h2>
+      <p>ChordyV helps you write chord charts and perform them live. You can mix chords, bars, and lyrics in one line, change the key instantly, and read everything clearly on stage.</p>
+      <h3>Main screens</h3>
+      <ul>
+        <li><b>Library</b> — manage songs and folders; filter by Key or Beat.</li>
+        <li><b>Editor</b> — write chords, bars <code>|</code>, dots <code>...</code>, dashes <code>-</code>, <code>%</code>, and lyrics together.</li>
+        <li><b>Performance</b> — fullscreen view with Transpose (+/−), Sharps/Flats, Font size (A−/A+), and Auto-scroll.</li>
+      </ul>
+    </section>
+    <section id="write" class="card">
+      <h2 class="section-title">2) Writing Charts (Basic → Advanced)</h2>
+      <h3>Basic</h3>
+      <pre>Intro
+| C . . . | Dm . . . | Am . . . |</pre>
+      <h3>Mix with lyrics</h3>
+      <pre>Verse
+| C . . . | ~
+lyrics here...</pre>
+      <h3>Inversions & slash chords</h3>
+      <pre>| G/B  D  Em7 |
+| C   D  G   |</pre>
+      <h3>Complex chords + note icons</h3>
+      <pre>Chorus
+| Cmaj7#11 |
+| Em9  A7#5 |
+| Dmaj9/F# |  (♪) (♬)</pre>
+      <div class="note">Tip: keep each chord as its own token (separated by spaces). Avoid sticking chords to words.</div>
+    </section>
+    <section id="transpose" class="card">
+      <h2 class="section-title">3) Transpose (Change Key Fast)</h2>
+      <ul>
+        <li>Tap <b>+</b> or <b>−</b> to move up or down by semitones.</li>
+        <li>Choose <b>Sharps</b> or <b>Flats</b> (ChordyV won’t mix them).</li>
+        <li>Root and bass notes follow the new key; the chord quality stays the same.</li>
+      </ul>
+      <pre>(+2)
+Cmaj7#11 → Dmaj7#11
+A#7#5    → C7#5
+Gm7b5/Eb → Am7b5/F</pre>
+    </section>
+    <section id="recognize" class="card">
+      <h2 class="section-title">4) Lines & Colors (easy to read)</h2>
+      <ul>
+        <li>One line can include <b>chords</b>, <b>bars</b> (<code>|</code>, <code>%</code>, dots, dashes), <b>melody numbers</b>, and <b>lyrics</b>.</li>
+        <li>Chords are highlighted; lyrics stay plain so you can read them easily.</li>
+        <li>Write <code>(♪)</code> or <code>(♬)</code> to show small note icons above the line in Performance.</li>
+      </ul>
+      <div class="note">If a word looks like a chord by accident (e.g., “Am” inside a word), keep the letters together (e.g., <code>Amword</code>) so it’s treated as text.</div>
+    </section>
+    <section id="perform" class="card">
+      <h2 class="section-title">5) Performance (On Stage)</h2>
+      <ul>
+        <li>Use <b>Fullscreen</b> and <b>Auto-scroll</b> for hands-free playing.</li>
+        <li>Adjust font size with <b>A−/A+</b> for different lighting.</li>
+        <li>Keep section headers like <code>[Verse]</code>, <code>[Chorus]</code> to navigate quickly.</li>
+      </ul>
+    </section>
+    <section id="library" class="card">
+      <h2 class="section-title">6) Library & Setlist</h2>
+      <ul>
+        <li>Store songs, organize with folders/genres, and filter by <b>Key</b> or <b>Beat</b>.</li>
+        <li>Double-tap a song to jump straight to Performance.</li>
+        <li>Data is stored locally (offline). Export text for manual backups if needed.</li>
+      </ul>
+    </section>
+    <section id="best" class="card">
+      <h2 class="section-title">7) Best Practices</h2>
+      <ul>
+        <li>One token per chord; separate with spaces or commas.</li>
+        <li>Use uppercase roots (C, D#, Gm7).</li>
+        <li>Choose either Sharps or Flats for a clean chart.</li>
+        <li>Preview in Performance and test the transpose steps you’ll use.</li>
+      </ul>
+    </section>
+    <section id="examples" class="card">
+      <h2 class="section-title">8) More Examples (Copy-ready)</h2>
+      <h3>Mixed line with complex chords</h3>
+      <pre>Intro
+| Cmaj7#11   Gm7b5/Eb | A#7#5 | (♪) (♬)</pre>
+      <h3>Jazz changes</h3>
+      <pre>||
+| Fmaj7  G13 |
+| Em7b5  A7b9 |
+| Dm9    G13 |
+| Cmaj9 |
+||</pre>
+    </section>
+    <section id="limits" class="card">
+      <h2 class="section-title">9) Limitations</h2>
+      <ul>
+        <li>Tablature is not supported.</li>
+        <li>Only A–G note names are recognized.</li>
+        <li>Chords glued to words (e.g., <i>wordCmaj7</i>) are treated as text.</li>
+      </ul>
+    </section>
+    <section id="faq" class="card">
+      <h2 class="section-title">10) FAQ</h2>
+      <p><b>Chord didn’t change?</b> Make sure it’s a standalone token (space before/after) and uses A–G names.</p>
+      <p><b>Sharps vs Flats?</b> Pick one. ChordyV won’t mix them to keep charts clean.</p>
+      <p><b>Note icons?</b> Type <code>(♪)</code> and <code>(♬)</code> exactly like that.</p>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div class="brand"><div class="logo" aria-hidden="true"></div>ChordyV</div>
+    <div>© <span id="y"></span> ChordyV</div>
+  </div>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
