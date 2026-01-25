@@ -122,6 +122,15 @@
   display: inline-block;
 }
   </style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-00EKC1XLJ9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-00EKC1XLJ9');
+</script>
 </head>
 <body>
 <header>
@@ -148,7 +157,11 @@
       <span class="eyebrow">All-in-one chord companion</span>
       <h1>Chord Chart Made Simple</h1>
       <p class="lead">Transpose instantly, auto-scroll, fullscreen view, and an organized Library & Setlist — so you can focus on your performance.</p>
-    <a href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa" target="_blank">
+   <a 
+  href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa"
+  target="_blank"
+  onclick="gtag('event','playstore_click',{event_label:'hero'});"
+>
   <img src="assets/playstore.svg" alt="Google Play Store" class="playstore-badge">
 </a>
         <a class="btn btn-ghost" href="#features">See Features</a>
@@ -222,7 +235,11 @@
   <div class="container">
     <h2 class="section-title">Get ChordyV</h2>
     <p class="muted">Available on Google Play. Web demo coming soon.</p>
- <a href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa" target="_blank">
+ <a 
+  href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa"
+  target="_blank"
+  onclick="gtag('event','playstore_click',{event_label:'download'});"
+>
   <img src="assets/playstore.svg" alt="Google Play Store" class="playstore-badge">
 </a>
       <a class="btn" style="border:1px solid #dbe7ff" href="#screenshots">See Screenshots</a>
