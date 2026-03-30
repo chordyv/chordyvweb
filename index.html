@@ -28,15 +28,54 @@
     a{color:inherit;text-decoration:none}
     .container{max-width:var(--maxw);margin-inline:auto;padding:clamp(16px,3vw,24px)}
 
-    /* Header */
+    /* Header Baru - Lebih Proposional */
     header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border-bottom:1px solid #eaf0ff}
-    .nav{display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
-    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--bg),var(--bg-deep));box-shadow:0 6px 16px rgba(0,0,0,.18)}
-    .menu{display:flex;gap:18px;align-items:center}
-    .menu a{padding:10px 12px;border-radius:10px}
-    .menu a:hover{background:#eef4ff}
+    
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .menu {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .menu a {
+      padding: 8px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .menu a:hover {
+      background: #f0f5ff;
+      color: var(--bg);
+    }
+
+    /* Highlight Tombol Download */
+    .menu a[href="#download"] {
+      color: #fff;
+      background: var(--bg);
+    }
+
     .mobile-toggle{display:none}
+
 
     /* Hero */
     .hero{background:radial-gradient(1200px 600px at 10% 10%,#6aa8ff33,transparent),linear-gradient(160deg,var(--bg),var(--bg-deep));color:var(--paper)}
@@ -134,44 +173,47 @@
 </head>
 <body>
 <header>
-  <div class="brand">
-  <img src="assets/logochordyv.png" alt="ChordyV Logo" class="logo-img">
-  ChordyV
-</div>
-    <nav class="menu" id="menu">
-      <a href="#features">Features</a>
-      <a href="#screenshots">Screenshots</a>
-      <a href="#download">Download</a>
-<a href="userguide.html">User Guide</a>
-      <a href="#faq">FAQ</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+  <div class="container">
+    <nav class="nav-wrapper">
+      <div class="brand">
+        <img src="assets/logochordyv.png" alt="ChordyV Logo" class="logo-img">
+        <span>ChordyV</span>
+      </div>
+      
+      <div class="menu" id="menu">
+        <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#download">Download</a>
+        <a href="userguide.html">User Guide</a>
+        <a href="#faq">FAQ</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+
+      <button class="mobile-toggle" id="menuBtn" aria-label="Open menu">Menu</button>
     </nav>
-    <button class="mobile-toggle" id="menuBtn" aria-label="Open menu">Menu</button>
   </div>
 </header>
+
 
 <section class="hero">
   <div class="container wrap">
     <div>
-      <span class="eyebrow">All-in-one chord companion</span>
-      <h1>Chord Chart Made Simple</h1>
-      <p class="lead">Transpose instantly, auto-scroll, fullscreen view, and an organized Library & Setlist — so you can focus on your performance.</p>
-   <a 
-  href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa"
-  target="_blank"
-  onclick="gtag('event','playstore_click',{event_label:'hero'});"
->
-  <img src="assets/playstore.svg" alt="Google Play Store" class="playstore-badge">
-</a>
-        <a class="btn btn-ghost" href="#features">See Features</a>
-      </div>
+      <span class="eyebrow">Smart Chord Charts</span>
+      <h1>Elevate Your Live Performance</h1>
+      <p class="lead">An innovative productivity tool that transforms messy chord sheets into structured, bar-based formats. Transpose instantly, auto-scroll, and keep your focus on the music.</p>
+      
+      <a href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa" target="_blank" onclick="gtag('event','playstore_click',{event_label:'hero'});">
+        <img src="assets/playstore.svg" alt="Google Play Store" class="playstore-badge">
+      </a>
+      <a class="btn btn-ghost" href="#features">See Features</a>
     </div>
-   <div class="hero-shot" aria-label="App mockup">
-  <img src="assets/fullscreenmockup.png" alt="App on tablet" loading="lazy" />
-</div>
+    <div class="hero-shot" aria-label="App mockup">
+      <img src="assets/fullscreenmockup.png" alt="App on tablet" loading="lazy" />
+    </div>
   </div>
 </section>
+
 
 <section id="features">
   <div class="container">
@@ -222,14 +264,25 @@
 
 <section>
   <div class="container">
-    <h2 class="section-title">Why it’s better</h2>
+    <h2 class="section-title">Why Musicians Love ChordyV</h2>
+    <p class="muted">Designed specifically to enhance your live performances and rehearsals.</p>
     <div class="why">
-      <div class="item"><h4>Faster than manual</h4><p>Transposition and formatting are instant — no more rewriting charts from scratch.</p></div>
-      <div class="item"><h4>Cleaner on stage</h4><p>Fullscreen view with adjustable fonts keeps your chart readable under any lighting.</p></div>
-      <div class="item"><h4>Organized for real gigs</h4><p>Library, Folders, and Setlists streamline rehearsals all the way to performance.</p></div>
+      <div class="item">
+        <h4>Precision for Complex Chords</h4>
+        <p>Supports accurate transposition without compromising the integrity of the music, perfect for complex jazz progressions.</p>
+      </div>
+      <div class="item">
+        <h4>Seamless Layout Integration</h4>
+        <p>Mix chords, notes, and text effortlessly. Your bar-based layout remains intact, which is crucial during high-pressure gigs.</p>
+      </div>
+      <div class="item">
+        <h4>Performance-Ready Workflow</h4>
+        <p>Equipped with Normalize Automation, Auto-Scroll, and offline capabilities to simplify your preparation process.</p>
+      </div>
     </div>
   </div>
 </section>
+
 
 <section id="download">
   <div class="container">
