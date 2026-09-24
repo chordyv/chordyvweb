@@ -634,7 +634,37 @@ header {
       transform: translateY(1px) !important;
       border-bottom-width: 1px !important;
     }
-  </style>
+
+/* ==========================================================================
+   STYLING BAGIAN BAWAH SEAMLESS (FAQ & FOOTER IN HERO-BG-SYNC)
+   ========================================================================== */
+
+/* 1. Styling elemen FAQ saat di dalam background biru */
+.hero-bg-sync details {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.hero-bg-sync summary {
+  color: #FFFFFF !important;
+}
+
+.hero-bg-sync details p {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 2. Buat footer transparan & warna teks putih transparan */
+.hero-bg-sync footer {
+  background: transparent !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 3. Atur padding section di dalamnya agar alurnya mulus tanpa jarak berlebih */
+.hero-bg-sync section {
+  padding: clamp(40px, 6vw, 64px) 0;
+}  </style>
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-00EKC1XLJ9"></script>
@@ -774,42 +804,45 @@ header {
   </div>
 </section>
 
-<section id="download">
-  <div class="container">
-    <h2 class="section-title">Get ChordyV</h2>
-    <p class="muted">Available on Google Play. Web demo coming soon.</p>
-    <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-top:20px;">
-      <!-- 3. Section Download Bawah -->
-      <a href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa" 
-         target="_blank" 
-         class="playstore-3d-wrapper"
-         onclick="gtag('event','playstore_click',{event_label:'download'});">
-        <img src="assets/playstore.svg" alt="Google Play Store" class="playstore-badge" style="margin:0; display:block;">
-      </a>
-      <!-- Tombol Primary 3D -->
-      <a class="btn-3d-primary" href="#screenshots">See Screenshots</a>
-    </div>
-  </div>
-</section>
-<section id="faq">
-  <div class="container">
-    <h2 class="section-title">FAQ</h2>
-    <details><summary>Does the app support sharps and flats?</summary><p>Absolutely. You can switch between ♯ and ♭ display at any time.</p></details>
-    <details><summary>Can I use fullscreen and auto-scroll together?</summary><p>Yes — that's the recommended setup for live performance.</p></details>
-    <details><summary>Is there a library and setlist feature?</summary><p>Yes. Store all songs in one place, organize by folders/genres, and sort quickly by key or folder.</p></details>
-  </div>
-</section>
+<!-- BUNGKUS DENGAN DIV INI DI PINGGIR LUAR -->
+<div class="hero-bg-sync">
 
-<footer>
-  <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-    <div class="brand">
-      <img src="assets/logochordyv.png" alt="ChordyV Logo" class="logo-img">
-      ChordyV
+  <section id="download">
+    <div class="container">
+      <h2 class="section-title">Get ChordyV</h2>
+      <p class="muted">Available on Google Play. Web demo coming soon.</p>
+      <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-top:20px;">
+        <a href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa" 
+           target="_blank" 
+           class="playstore-3d-wrapper"
+           onclick="gtag('event','playstore_click',{event_label:'download'});">
+          <img src="assets/playstore.svg" alt="Google Play Store" class="playstore-badge" style="margin:0; display:block;">
+        </a>
+        <a class="btn-3d-primary" href="#screenshots">See Screenshots</a>
+      </div>
     </div>
-    <div>© <span id="y"></span> ChordyV. All rights reserved · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
-  </div>
-</footer>
+  </section>
 
+  <section id="faq">
+    <div class="container">
+      <h2 class="section-title">FAQ</h2>
+      <details><summary>Does the app support sharps and flats?</summary><p>Absolutely. You can switch between ♯ and ♭ display at any time.</p></details>
+      <details><summary>Can I use fullscreen and auto-scroll together?</summary><p>Yes — that's the recommended setup for live performance.</p></details>
+      <details><summary>Is there a library and setlist feature?</summary><p>Yes. Store all songs in one place, organize by folders/genres, and sort quickly by key or folder.</p></details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div class="brand">
+        <img src="assets/logochordyv.png" alt="ChordyV Logo" class="logo-img">
+        <span style="color:#FFFFFF !important;">ChordyV</span>
+      </div>
+      <div style="color: rgba(255, 255, 255, 0.8);">© <span id="y"></span> ChordyV. All rights reserved · <a href="privacy.html" style="color: #FFFFFF;">Privacy</a> · <a href="terms.html" style="color: #FFFFFF;">Terms</a></div>
+    </div>
+  </footer>
+
+</div>
 <script>
   // Mobile menu toggle
   const btn = document.getElementById('menuBtn');
