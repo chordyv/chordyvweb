@@ -75,30 +75,41 @@
       padding: clamp(16px, 3vw, 28px);
     }
 
-    /* Header Navbar 3D Tactile Panel */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      /* Gradasi lembut dari putih kilap ke silver slate */
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      /* Pantulan cahaya atas & border tebal bawah */
-      border-top: 1px solid #FFFFFF;
-      border-bottom: 4px solid #94A3B8;
-      /* Bayangan berlapis biar makin ngangkat */
-      box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 1),
-        0 8px 20px -4px rgba(15, 23, 42, 0.12);
-      transition: all 0.3s ease;
+    /* Paksa Header & Semua Elemen di Dalamnya Transparan Total */
+    header, 
+    header *,
+    .header, 
+    .nav, 
+    .navbar {
+      background-color: transparent !important;
+      background: transparent !important;
+      box-shadow: none !important;
     }
+
+   /* ==========================================================================
+   HEADER & NAVBAR (FULL SEAMLESS TRANSPARENT OVERLAY)
+   ========================================================================== */
+
+header {
+  position: absolute; /* Dibarui dari sticky menjadi absolute agar melayang di atas Hero */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: none !important;
+  box-shadow: none !important;
+  padding: 8px 0;
+}
 
     .nav-wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 72px;
+      height: 64px;
+      background: transparent !important;
     }
 
     .brand {
@@ -107,8 +118,13 @@
       gap: 12px;
       font-weight: 800;
       font-size: 1.25rem;
-      color: var(--ink);
       letter-spacing: -0.5px;
+      background: transparent !important;
+    }
+
+    .brand span {
+      color: #FFFFFF !important;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .logo-img {
@@ -121,43 +137,21 @@
 
     .menu {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       align-items: center;
-    }
-
-    .menu a {
-      padding: 8px 14px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--ink-soft);
-      border-radius: var(--radius-sm);
-      transition: all 0.2s ease;
-    }
-
-    .menu a:hover {
-      background: var(--primary-light);
-      color: var(--primary);
-    }
-
-    .menu a[href="#download"] {
-      color: var(--paper);
-      background: var(--primary);
-      box-shadow: 0 4px 12px rgba(15, 82, 214, 0.25);
-    }
-
-    .menu a[href="#download"]:hover {
-      background: var(--primary-hover);
+      background: transparent !important;
     }
 
     .mobile-toggle {
       display: none;
       padding: 8px 14px;
-      border: 1px solid var(--border-color);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: var(--radius-sm);
-      background: var(--paper);
+      background: rgba(255, 255, 255, 0.1);
       font-weight: 600;
-      color: var(--ink);
+      color: #FFFFFF;
       cursor: pointer;
+      backdrop-filter: blur(4px);
     }
 
     /* Hero Section PWA Blue Gradient */
@@ -170,12 +164,13 @@
     }
 
     .hero .wrap {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: clamp(24px, 4vw, 48px);
-      align-items: center;
-      min-height: 540px;
-    }
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  min-height: 540px;
+  padding-top: 80px; /* Tambahkan ini agar teks tidak tertutup header */
+}
 /* Samakan Background Screenshots dengan Hero Section */
     .hero-bg-sync {
       background: radial-gradient(1000px 500px at 20% 20%, rgba(117, 225, 255, 0.25), transparent),
@@ -326,35 +321,75 @@
       color: var(--ink-soft);
     }
 
-    /* Carousel Screenshots */
+    /* Carousel Container (Sembunyikan Scrollbar Asli) */
     .shots {
       display: flex;
-      gap: 20px;
+      gap: 28px;
       overflow-x: auto;
-      padding: 16px 4px;
+      padding: 30px 10px 30px 10px;
       scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+      -ms-overflow-style: none; /* Sembunyikan scrollbar di IE/Edge */
     }
 
+    .shots::-webkit-scrollbar {
+      display: none; /* Sembunyikan scrollbar di Chrome, Safari, Opera */
+    }
+
+    /* Gambar Screenshots Floating 3D */
     .shot {
       flex: 0 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: min(260px, 45vw);
-      height: 440px;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-sm);
-      background: var(--paper);
-      scroll-snap-align: start;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      scroll-snap-align: center;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .shot img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
+      height: 460px;
+      width: auto;
+      border-radius: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 
+        0 20px 40px -10px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
     }
+
+    .shot:hover img {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 
+        0 28px 48px -10px rgba(0, 0, 0, 0.75),
+        0 0 20px rgba(117, 225, 255, 0.3);
+    }
+
+    /* Indikator Dot ala Instagram */
+    .dots-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    /* Dot Aktif (Gambar yang Sedang Dilihat) */
+    .dot.active {
+      width: 24px; /* Agak memanjang seperti indikator modern */
+      border-radius: 12px;
+      background: #75E1FF; /* Warna cyan aksen ChordyV */
+      box-shadow: 0 0 10px rgba(117, 225, 255, 0.6);
+    }
+
 
     /* Features / Why Choose Us */
     .why {
@@ -564,34 +599,42 @@
 }
 
 /* 4. Navigasi Menu Header 3D (Adaptasi dari .ed-tool-btn Editor PWA) */
-.nav-3d-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 14px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #334155 !important;
-  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%) !important;
-  border: 1px solid #cbd5e1 !important;
-  border-bottom: 2.5px solid #94a3b8 !important;
-  border-radius: var(--radius-sm);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) !important;
-  transition: all 0.1s ease;
-  user-select: none;
-  text-decoration: none;
-}
+    /* Tombol Navigasi Menu 3D Putih Kilap (Timbul & Menyala di Atas Background Biru) */
+    .nav-3d-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 15px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0B1B37 !important; /* Teks biru pekat biar sangat jelas */
+      background: linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%) !important;
+      border: 1px solid #FFFFFF !important;
+      border-top: 1px solid #FFFFFF !important;
+      border-bottom: 3px solid #94A3B8 !important; /* Lis 3D tebal */
+      border-radius: var(--radius-sm);
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 4px 12px rgba(0, 0, 0, 0.25) !important;
+      transition: all 0.15s ease;
+      user-select: none;
+      text-decoration: none;
+    }
 
-.nav-3d-link:hover {
-  color: #0284c7 !important;
-  border-color: #38bdf8 !important;
-  border-bottom: 2.5px solid #0284c7 !important;
-}
+    .nav-3d-link:hover {
+      color: #0284C7 !important;
+      transform: translateY(-2px);
+      border-bottom-width: 3.5px !important;
+      box-shadow: 
+        0 6px 16px rgba(117, 225, 255, 0.4),
+        inset 0 1px 0 #FFFFFF !important;
+    }
 
-.nav-3d-link:active {
-  transform: translateY(1px) !important;
-  border-bottom: 1px solid #94a3b8 !important;
-}  </style>
+    .nav-3d-link:active {
+      transform: translateY(1px) !important;
+      border-bottom-width: 1px !important;
+    }
+  </style>
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-00EKC1XLJ9"></script>
@@ -689,11 +732,13 @@
   </div>
 </section>
 
-<section id="screenshots" class="hero-bg-sync">
+  <section id="screenshots" class="hero-bg-sync">
   <div class="container">
     <h2 class="section-title">Screenshots</h2>
     <p class="muted">Phone portrait and tablet landscape supported.</p>
-    <div class="shots" aria-label="Screenshots carousel">
+    
+    <!-- Tambahkan id="shotsContainer" di sini -->
+    <div class="shots" id="shotsContainer" aria-label="Screenshots carousel">
       <figure class="shot"><img loading="lazy" src="assets/librarymockup.png" alt="Library mockup" width="1024" height="1536"/></figure>
       <figure class="shot"><img loading="lazy" src="assets/editormockup.png" alt="Editor mockup" width="1024" height="1536"/></figure>
       <figure class="shot"><img loading="lazy" src="assets/performancemockup.png" alt="Performance mockup" width="1024" height="1536"/></figure>
@@ -702,6 +747,9 @@
       <figure class="shot"><img loading="lazy" src="assets/normalizesc2.png" alt="Normalize Form - Analyze & Edit" width="1024" height="1536"/></figure>
       <figure class="shot"><img loading="lazy" src="assets/normalizesc3.png" alt="Normalize Form - Output & Send to Editor" width="1024" height="1536"/></figure>
     </div>
+
+    <!-- Wadah Titik Indikator (Dots) ditaruh tepat di sini -->
+    <div class="dots-container" id="dotsContainer"></div>
   </div>
 </section>
 
@@ -785,6 +833,47 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "url": "https://chordyv.com"
 }
+
+// Auto Generate & Sync Dot Indicator ala Instagram
+  const shotsContainer = document.getElementById('shotsContainer');
+  const dotsContainer = document.getElementById('dotsContainer');
+  const shots = shotsContainer.querySelectorAll('.shot');
+
+  // 1. Bikin dot sesuai jumlah gambar otomatis
+  shots.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (index === 0) dot.classList.add('active');
+    
+    // Klik dot untuk berpindah ke gambar tersebut
+    dot.addEventListener('click', () => {
+      shots[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    });
+    
+    dotsContainer.appendChild(dot);
+  });
+
+  // 2. Update dot aktif saat gambar di-swipe / di-scroll
+  const dots = dotsContainer.querySelectorAll('.dot');
+  shotsContainer.addEventListener('scroll', () => {
+    let activeIndex = 0;
+    let minDistance = Infinity;
+
+    shots.forEach((shot, index) => {
+      const rect = shot.getBoundingClientRect();
+      const containerRect = shotsContainer.getBoundingClientRect();
+      const distance = Math.abs((rect.left + rect.width / 2) - (containerRect.left + containerRect.width / 2));
+      
+      if (distance < minDistance) {
+        minDistance = distance;
+        activeIndex = index;
+      }
+    });
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === activeIndex);
+    });
+  });
 </script>
 
 </body>
