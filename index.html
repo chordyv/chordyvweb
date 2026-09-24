@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://chordyv.com">
-<meta charset="utf-8" />
+  <link rel="canonical" href="https://chordyv.com">
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ChordyV — Chord Chart Made Simple</title>
   <meta name="description" content="Transpose instantly, auto-scroll, fullscreen mode, and an organized Library & Setlist. Focus on your performance." />
@@ -11,26 +11,89 @@
   <meta property="og:description" content="Transpose instantly, auto-scroll, fullscreen mode, and an organized Library & Setlist." />
   <meta property="og:image" content="assets/og-image.jpg" />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0e4fd1" />
- <!-- PNG untuk Google Search -->
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+  <meta name="theme-color" content="#0F52D6" />
 
-<!-- ICO fallback untuk browser lama -->
-<link rel="shortcut icon" href="/logochordyv.ico">
+  <!-- PNG untuk Google Search -->
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+
+  <!-- ICO fallback untuk browser lama -->
+  <link rel="shortcut icon" href="/logochordyv.ico">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root{--bg:#0F52D6;--bg-deep:#0B3FB2;--ink:#0b1b37;--ink-soft:#3b4b6b;--paper:#ffffff;--accent:#75E1FF;--maxw:1200px}
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";color:var(--ink);background:#f7f9fd;line-height:1.6}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:var(--maxw);margin-inline:auto;padding:clamp(16px,3vw,24px)}
+    /* ==========================================================================
+       PWA DESIGN SYSTEM SYNC (ChordyV)
+       ========================================================================== */
+    :root {
+      --primary: #0F52D6;
+      --primary-hover: #0B3FB2;
+      --primary-light: #EEF4FF;
+      --accent: #75E1FF;
+      --accent-glow: rgba(117, 225, 255, 0.4);
+      --bg-dark: #0B1B37;
+      --surface-dark: #071E3D;
+      --ink: #0B1B37;
+      --ink-soft: #4A5568;
+      --ink-muted: #718096;
+      --paper: #FFFFFF;
+      --bg-body: #F4F7FC;
+      --border-color: #E2E8F0;
+      --border-glass: rgba(255, 255, 255, 0.18);
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-dark: rgba(11, 27, 55, 0.85);
+      --shadow-sm: 0 2px 8px rgba(15, 82, 214, 0.06);
+      --shadow-md: 0 8px 24px rgba(15, 82, 214, 0.1);
+      --shadow-lg: 0 16px 32px rgba(11, 27, 55, 0.15);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --maxw: 1200px;
+    }
 
-    /* Header Baru - Lebih Proposional */
-    header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border-bottom:1px solid #eaf0ff}
-    
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background-color: var(--bg-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: var(--maxw);
+      margin-inline: auto;
+      padding: clamp(16px, 3vw, 28px);
+    }
+
+    /* Header Navbar 3D Tactile Panel */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      /* Gradasi lembut dari putih kilap ke silver slate */
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      /* Pantulan cahaya atas & border tebal bawah */
+      border-top: 1px solid #FFFFFF;
+      border-bottom: 4px solid #94A3B8;
+      /* Bayangan berlapis biar makin ngangkat */
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        0 8px 20px -4px rgba(15, 23, 42, 0.12);
+      transition: all 0.3s ease;
+    }
+
     .nav-wrapper {
       display: flex;
       align-items: center;
@@ -41,137 +104,506 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       font-weight: 800;
-      font-size: 1.1rem;
-      flex-shrink: 0;
+      font-size: 1.25rem;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-img {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      object-fit: contain;
+      box-shadow: var(--shadow-sm);
     }
 
     .menu {
       display: flex;
-      gap: 4px;
+      gap: 6px;
       align-items: center;
     }
 
     .menu a {
-      padding: 8px 10px;
-      font-size: 13px;
+      padding: 8px 14px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--ink-soft);
-      border-radius: 8px;
-      white-space: nowrap;
+      border-radius: var(--radius-sm);
       transition: all 0.2s ease;
     }
 
     .menu a:hover {
-      background: #f0f5ff;
-      color: var(--bg);
+      background: var(--primary-light);
+      color: var(--primary);
     }
 
-    /* Highlight Tombol Download */
     .menu a[href="#download"] {
-      color: #fff;
-      background: var(--bg);
+      color: var(--paper);
+      background: var(--primary);
+      box-shadow: 0 4px 12px rgba(15, 82, 214, 0.25);
     }
 
-    .mobile-toggle{display:none}
+    .menu a[href="#download"]:hover {
+      background: var(--primary-hover);
+    }
 
+    .mobile-toggle {
+      display: none;
+      padding: 8px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: var(--paper);
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+    }
 
-    /* Hero */
-    .hero{background:radial-gradient(1200px 600px at 10% 10%,#6aa8ff33,transparent),linear-gradient(160deg,var(--bg),var(--bg-deep));color:var(--paper)}
-    .hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(20px,3vw,40px);align-items:center;min-height:520px}
-    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;font-size:12px;letter-spacing:.4px}
-    h1{margin:10px 0 12px;font-size:clamp(28px,4.2vw,52px);line-height:1.1}
-    .lead{margin:0 0 20px;font-size:clamp(15px,1.7vw,18px);opacity:.95}
-    .cta{display:flex;gap:14px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;font-weight:650;border:1px solid transparent;box-shadow:0 6px 16px rgba(0,0,0,.12)}
-    .btn-primary{background:var(--paper);color:var(--ink)}
-    .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+    /* Hero Section PWA Blue Gradient */
+    .hero {
+      background: radial-gradient(1000px 500px at 20% 20%, rgba(117, 225, 255, 0.25), transparent),
+                  linear-gradient(145deg, var(--primary) 0%, var(--bg-dark) 100%);
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
 
-   /* HERO image without extra frame */
-.hero-shot{
-  width: clamp(300px, 60vw, 560px);
-  margin-inline: auto;
+    .hero .wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: clamp(24px, 4vw, 48px);
+      align-items: center;
+      min-height: 540px;
+    }
+/* Samakan Background Screenshots dengan Hero Section */
+    .hero-bg-sync {
+      background: radial-gradient(1000px 500px at 20% 20%, rgba(117, 225, 255, 0.25), transparent),
+                  linear-gradient(145deg, var(--primary) 0%, var(--bg-dark) 100%);
+      color: var(--paper);
+    }
+
+    /* Penyesuaian warna judul & deskripsi agar terang dan kontras */
+    .hero-bg-sync .section-title {
+      color: #FFFFFF !important;
+    }
+    .hero-bg-sync .muted {
+      color: rgba(255, 255, 255, 0.8) !important;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      backdrop-filter: blur(4px);
+    }
+
+    h1 {
+      margin: 14px 0 16px;
+      font-size: clamp(32px, 4.5vw, 54px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+
+    .lead {
+      margin: 0 0 24px;
+      font-size: clamp(16px, 1.8vw, 19px);
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--paper);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .hero-shot {
+      width: clamp(300px, 60vw, 560px);
+      margin-inline: auto;
+    }
+
+    .hero-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-glass);
+    }
+
+    /* Section Styling */
+    section { padding: clamp(56px, 8vw, 96px) 0; }
+
+    .section-title {
+      font-size: clamp(24px, 3.5vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin: 0 0 10px;
+      color: var(--ink);
+    }
+
+    .muted { color: var(--ink-soft); font-size: 16px; margin-top: 0; }
+
+    .grid { display: grid; gap: 24px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+    /* Card PWA Styling */
+    .card {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+      border: 1px solid #CBD5E1;
+      border-top: 1px solid #FFFFFF;
+      border-bottom: 4px solid #94A3B8;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 8px 20px rgba(15, 23, 42, 0.06);
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      margin-top: 20px;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-bottom-width: 5px;
+      border-color: #94A3B8;
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        0 12px 28px rgba(15, 82, 214, 0.1);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      border: 1px solid rgba(15, 82, 214, 0.15);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card h3 {
+      margin: 12px 0 6px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    /* Carousel Screenshots */
+    .shots {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 16px 4px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .shot {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: min(260px, 45vw);
+      height: 440px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      background: var(--paper);
+      scroll-snap-align: start;
+    }
+
+    .shot img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    /* Features / Why Choose Us */
+    .why {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Ini bagian yang diganti ke style 3D Tactile */
+    .why .item {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+      border: 1px solid #CBD5E1;
+      border-top: 1px solid #FFFFFF;
+      border-bottom: 4px solid #94A3B8;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 6px 16px rgba(15, 23, 42, 0.05);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .why .item:hover {
+      transform: translateY(-2px);
+      border-bottom-width: 5px;
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        0 10px 24px rgba(15, 82, 214, 0.08);
+    }
+
+    .why h4 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .why p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    .playstore-badge {
+      height: 56px;
+      width: auto;
+      margin-top: 10px;
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .playstore-badge:hover {
+      transform: translateY(-2px);
+    }
+
+    /* FAQ Details Sync */
+    details {
+      background: var(--paper);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    summary {
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    details p {
+      margin: 10px 0 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border-color);
+      background: var(--paper);
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero .wrap { grid-template-columns: 1fr; text-align: center; }
+      .grid.cols-3 { grid-template-columns: 1fr 1fr; }
+      .why { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .menu {
+        display: none;
+        position: absolute;
+        right: 16px;
+        top: 68px;
+        background: var(--paper);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 12px;
+        box-shadow: var(--shadow-lg);
+        width: 200px;
+      }
+      .menu a { display: block; padding: 10px 12px; }
+      .mobile-toggle { display: inline-flex; }
+      .menu.open { display: block; }
+      .grid.cols-3 { grid-template-columns: 1fr; }
+    }
+/* ==========================================================================
+   BUTTONS 3D TACTILE (PURE CHORDYV PWA SYNC)
+   ========================================================================== */
+
+/* 1. Tombol Primary 3D (Adaptasi dari .cv-fab & .btn-normalize PWA) */
+.btn-3d-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-weight: 800;
+  color: #FFFFFF !important;
+  background: linear-gradient(180deg, #38bdf8 0%, #0284c7 50%, #0369a1 100%) !important;
+  border: none !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.6) !important;
+  border-bottom: 4px solid #0c4a6e !important;
+  border-radius: var(--radius-md);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 8px 20px rgba(2, 132, 199, 0.45),
+    0 12px 25px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.1s ease;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
 }
-.hero-shot img{
-  display:block;
-  width:100%;
-  height:auto;           /* pakai rasio asli gambarmu */
-  border-radius:16px;    /* sudut halus saja */
-  box-shadow: 0 16px 40px rgba(0,0,0,.25); /* biar tetap pop */
-}
-    section{padding:clamp(48px,8vw,96px) 0}
-    .section-title{font-size:clamp(22px,3.2vw,36px);margin:0 0 10px}
-    .muted{color:var(--ink-soft)}
 
-    .grid{display:grid;gap:20px}
-    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-    .card{background:#fff;border:1px solid #eaf0ff;border-radius:16px;padding:18px 18px 16px;box-shadow:0 6px 16px rgba(0,0,0,.08)}
-    .chip{display:inline-flex;align-items:center;gap:8px;font-size:12px;padding:6px 10px;border-radius:999px;background:#eef6ff;color:#0a3fa8;font-weight:600;border:1px solid #d9e7ff}
-    .card h3{margin:10px 0 6px;font-size:18px}
-
-    /* Google Play-like gallery */
-    .shots{display:flex;gap:20px;overflow-x:auto;padding:10px 0;scroll-snap-type:x mandatory}
-    .shot{flex:0 0 auto;width:240px;border-radius:12px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.12);scroll-snap-align:start}
-    .shot img{width:100%;height:auto;object-fit:contain;background:#fff;padding:8px;border-radius:12px}
-
-    .why{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
-    .why .item{background:#fff;border:1px solid #eaf0ff;border-radius:16px;padding:18px;box-shadow:0 6px 16px rgba(0,0,0,.08)}
-
-    .download{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-    .badge{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:#111;color:#fff;font-weight:600}
-    .badge .small{font-weight:400;font-size:12px;opacity:.8}
-
-    footer{padding:28px 0;border-top:1px solid #eaf0ff;color:var(--ink-soft);font-size:14px}
-    html{scroll-behavior:smooth}
-
-    @media (max-width:900px){.hero .wrap{grid-template-columns:1fr;text-align:center}.grid.cols-3{grid-template-columns:1fr 1fr}.why{grid-template-columns:1fr}}
-    @media (max-width:640px){.menu{display:none;position:absolute;right:16px;top:64px;background:#fff;border:1px solid #dbe7ff;border-radius:12px;padding:12px;box-shadow:0 10px 24px rgba(0,0,0,.12)}
-      .menu a{display:block;padding:10px 12px;border-radius:8px}.menu a:hover{background:#eef4ff}
-      .mobile-toggle{display:inline-flex;padding:10px 12px;border:1px solid #dbe7ff;border-radius:10px;background:#fff}
-      .menu.open{display:block} .grid.cols-3{grid-template-columns:1fr}}
-.logo-img{
-  width:36px;      /* kecilin tampilan */
-  height:36px;
-  border-radius:10px;      /* biar agak rounded */
-  object-fit:contain;      /* supaya nggak gepeng */
-}
-.shot{
-  display:flex;
-  align-items:center;   /* vertikal center */
-  justify-content:center; /* horizontal center */
-  min-width: min(260px, 45vw);
-  height: 420px;         /* kasih tinggi fix biar rapi */
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid #eaf0ff;
-  box-shadow:var(--shadow-soft);
-  background:#fff;
+.btn-3d-primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
 }
 
-.shot img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;   /* biar gak kepotong */
+.btn-3d-primary:active {
+  transform: translateY(2px) !important;
+  border-bottom: 2px solid #0c4a6e !important;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 4px 10px rgba(2, 132, 199, 0.3) !important;
 }
-.playstore-badge {
-  height: 60px;     /* tinggi badge */
-  width: auto;      /* biar proporsional */
-  margin-top: 10px; /* kasih jarak dari elemen atas */
+
+/* 2. Tombol Ghost/Secondary 3D (Adaptasi dari .ed-chord-mode-btn PWA) */
+.btn-3d-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-weight: 700;
+  color: #F8FAFC !important;
+  background: linear-gradient(180deg, #334155 0%, #1e293b 100%) !important;
+  border: 1px solid #475569 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-bottom: 3.5px solid #0f172a !important;
+  border-radius: var(--radius-md);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.1s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-3d-ghost:hover {
+  background: linear-gradient(180deg, #475569 0%, #334155 100%) !important;
+  transform: translateY(-1px);
+}
+
+.btn-3d-ghost:active {
+  transform: translateY(2px) !important;
+  border-bottom: 1px solid #0f172a !important;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 3. Badge Playstore Wrapper 3D */
+.playstore-3d-wrapper {
   display: inline-block;
+  border-radius: var(--radius-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 4px solid #0f172a;
+  background: #000000;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  transition: all 0.1s ease;
 }
-  </style>
-<!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-00EKC1XLJ9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-00EKC1XLJ9');
-</script>
+.playstore-3d-wrapper:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.playstore-3d-wrapper:active {
+  transform: translateY(2px);
+  border-bottom: 2px solid #0f172a;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 4. Navigasi Menu Header 3D (Adaptasi dari .ed-tool-btn Editor PWA) */
+.nav-3d-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155 !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%) !important;
+  border: 1px solid #cbd5e1 !important;
+  border-bottom: 2.5px solid #94a3b8 !important;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.1s ease;
+  user-select: none;
+  text-decoration: none;
+}
+
+.nav-3d-link:hover {
+  color: #0284c7 !important;
+  border-color: #38bdf8 !important;
+  border-bottom: 2.5px solid #0284c7 !important;
+}
+
+.nav-3d-link:active {
+  transform: translateY(1px) !important;
+  border-bottom: 1px solid #94a3b8 !important;
+}  </style>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-00EKC1XLJ9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-00EKC1XLJ9');
+  </script>
 </head>
 <body>
+
 <header>
   <div class="container">
     <nav class="nav-wrapper">
@@ -181,20 +613,20 @@
       </div>
       
       <div class="menu" id="menu">
-        <a href="#features">Features</a>
-        <a href="#screenshots">Screenshots</a>
-        <a href="#download">Download</a>
-        <a href="userguide.html">User Guide</a>
-        <a href="#faq">FAQ</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
-      </div>
+  <a href="#features" class="nav-3d-link">Features</a>
+  <a href="#screenshots" class="nav-3d-link">Screenshots</a>
+  <a href="userguide.html" class="nav-3d-link">User Guide</a>
+  <a href="#faq" class="nav-3d-link">FAQ</a>
+  <a href="privacy.html" class="nav-3d-link">Privacy</a>
+  <a href="terms.html" class="nav-3d-link">Terms</a>
+  <!-- Tombol CTA Utama Download -->
+  <a href="#download" class="btn-3d-primary" style="padding: 7px 16px; font-size: 13px;">Get App</a>
+</div>
 
       <button class="mobile-toggle" id="menuBtn" aria-label="Open menu">Menu</button>
     </nav>
   </div>
 </header>
-
 
 <section class="hero">
   <div class="container wrap">
@@ -203,10 +635,17 @@
       <h1>Elevate Your Live Performance</h1>
       <p class="lead">An innovative productivity tool that transforms messy chord sheets into structured, bar-based formats. Transpose instantly, auto-scroll, and keep your focus on the music.</p>
       
-      <a href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa" target="_blank" onclick="gtag('event','playstore_click',{event_label:'hero'});">
-        <img src="assets/playstore.svg" alt="Google Play Store" class="playstore-badge">
-      </a>
-      <a class="btn btn-ghost" href="#features">See Features</a>
+      <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+        <!-- 2. Play Store Badge dengan efek tekan 3D -->
+        <a href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa" 
+           target="_blank" 
+           class="playstore-3d-wrapper"
+           onclick="gtag('event','playstore_click',{event_label:'hero'});">
+          <img src="assets/playstore.svg" alt="Google Play Store" class="playstore-badge" style="margin:0; display:block;">
+        </a>
+        <!-- Tombol Ghost 3D -->
+        <a class="btn-3d-ghost" href="#features">See Features</a>
+      </div>
     </div>
     <div class="hero-shot" aria-label="App mockup">
       <img src="assets/fullscreenmockup.png" alt="App on tablet" loading="lazy" />
@@ -214,14 +653,14 @@
   </div>
 </section>
 
-
 <section id="features">
   <div class="container">
     <h2 class="section-title">Everything you need for performance, composing, and organization</h2>
     <p class="muted">Built for musicians: fast, readable, and stage-ready.</p>
-    <div class="card" style="margin-top:18px">
+    
+    <div class="card">
       <span class="chip">Perform & Display</span>
-      <div class="grid cols-3" style="margin-top:12px">
+      <div class="grid cols-3" style="margin-top:16px">
         <div><h3>Transpose Instantly</h3><p>Change keys in one tap — no manual retyping.</p></div>
         <div><h3>Resize Fonts</h3><p>Adjust text size for any stage lighting.</p></div>
         <div><h3>Sharps ⇄ Flats</h3><p>Switch ♯ to ♭ (and vice versa) to fit your preference.</p></div>
@@ -229,24 +668,28 @@
         <div><h3>Auto-Scroll</h3><p>Hands-free scrolling with adjustable speed.</p></div>
       </div>
     </div>
-    <div class="card"><span class="chip">Compose & Arrange</span>
-      <div class="grid cols-3" style="margin-top:12px">
+
+    <div class="card">
+      <span class="chip">Compose & Arrange</span>
+      <div class="grid cols-3" style="margin-top:16px">
         <div><h3>Set Title, Key & Beat</h3><p>Start a song with clean metadata for your band.</p></div>
         <div><h3>Add Chords & Sections</h3><p>Lay out intro, verses, chorus, bridge — clearly.</p></div>
         <div><h3>Build Your Arrangement</h3><p>Order parts for rehearsal and live performance.</p></div>
       </div>
     </div>
-    <div class="card"><span class="chip">Library & Setlist</span>
-      <div class="grid cols-3" style="margin-top:12px">
+
+    <div class="card">
+      <span class="chip">Library & Setlist</span>
+      <div class="grid cols-3" style="margin-top:16px">
         <div><h3>Store Your Songs</h3><p>Keep every chart tidy in one place.</p></div>
         <div><h3>Folders & Genres</h3><p>Create setlists for gigs, practice, or styles.</p></div>
-        <div><h3>Quick Sort & Filter</h3><p>Find charts fast by Key,beat and Folder.</p></div>
+        <div><h3>Quick Sort & Filter</h3><p>Find charts fast by Key, beat and Folder.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="screenshots" style="background:#f2f6ff">
+<section id="screenshots" class="hero-bg-sync">
   <div class="container">
     <h2 class="section-title">Screenshots</h2>
     <p class="muted">Phone portrait and tablet landscape supported.</p>
@@ -255,9 +698,9 @@
       <figure class="shot"><img loading="lazy" src="assets/editormockup.png" alt="Editor mockup" width="1024" height="1536"/></figure>
       <figure class="shot"><img loading="lazy" src="assets/performancemockup.png" alt="Performance mockup" width="1024" height="1536"/></figure>
       <figure class="shot"><img loading="lazy" src="assets/fullscreenmockup.png" alt="Fullscreen mockup" width="1024" height="1536"/></figure>
-<figure class="shot"><img loading="lazy" src="assets/normalizesc1.png" alt="Normalize Form - Input" width="1024" height="1536"/></figure>
-<figure class="shot"><img loading="lazy" src="assets/normalizesc2.png" alt="Normalize Form - Analyze & Edit" width="1024" height="1536"/></figure>
-<figure class="shot"><img loading="lazy" src="assets/normalizesc3.png" alt="Normalize Form - Output & Send to Editor" width="1024" height="1536"/></figure>
+      <figure class="shot"><img loading="lazy" src="assets/normalizesc1.png" alt="Normalize Form - Input" width="1024" height="1536"/></figure>
+      <figure class="shot"><img loading="lazy" src="assets/normalizesc2.png" alt="Normalize Form - Analyze & Edit" width="1024" height="1536"/></figure>
+      <figure class="shot"><img loading="lazy" src="assets/normalizesc3.png" alt="Normalize Form - Output & Send to Editor" width="1024" height="1536"/></figure>
     </div>
   </div>
 </section>
@@ -283,23 +726,23 @@
   </div>
 </section>
 
-
 <section id="download">
   <div class="container">
     <h2 class="section-title">Get ChordyV</h2>
     <p class="muted">Available on Google Play. Web demo coming soon.</p>
- <a 
-  href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa"
-  target="_blank"
-  onclick="gtag('event','playstore_click',{event_label:'download'});"
->
-  <img src="assets/playstore.svg" alt="Google Play Store" class="playstore-badge">
-</a>
-      <a class="btn" style="border:1px solid #dbe7ff" href="#screenshots">See Screenshots</a>
+    <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-top:20px;">
+      <!-- 3. Section Download Bawah -->
+      <a href="https://play.google.com/store/apps/details?id=io.github.mulfiethea_pixel.twa" 
+         target="_blank" 
+         class="playstore-3d-wrapper"
+         onclick="gtag('event','playstore_click',{event_label:'download'});">
+        <img src="assets/playstore.svg" alt="Google Play Store" class="playstore-badge" style="margin:0; display:block;">
+      </a>
+      <!-- Tombol Primary 3D -->
+      <a class="btn-3d-primary" href="#screenshots">See Screenshots</a>
     </div>
   </div>
 </section>
-
 <section id="faq">
   <div class="container">
     <h2 class="section-title">FAQ</h2>
@@ -311,27 +754,38 @@
 
 <footer>
   <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-   <div class="brand">
-  <img src="assets/logochordyv.png" alt="ChordyV Logo" class="logo-img">
-  ChordyV
-</div>
+    <div class="brand">
+      <img src="assets/logochordyv.png" alt="ChordyV Logo" class="logo-img">
+      ChordyV
+    </div>
     <div>© <span id="y"></span> ChordyV. All rights reserved · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
   </div>
 </footer>
 
 <script>
-  // Mobile menu
+  // Mobile menu toggle
   const btn = document.getElementById('menuBtn');
   const menu = document.getElementById('menu');
-  btn?.addEventListener('click', ()=> menu.classList.toggle('open'));
-  menu?.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> menu.classList.remove('open')));
-  // Year
+  btn?.addEventListener('click', () => menu.classList.toggle('open'));
+  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  
+  // Dynamic Year
   document.getElementById('y').textContent = new Date().getFullYear();
 </script>
 
-<!-- SEO structured data -->
+<!-- SEO Structured Data -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ChordyV","applicationCategory":"Music","operatingSystem":"Android, Web","description":"Transpose instantly, auto-scroll, fullscreen view, and organized Library & Setlist.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://chordyv.com"}
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ChordyV",
+  "applicationCategory": "Music",
+  "operatingSystem": "Android, Web",
+  "description": "Transpose instantly, auto-scroll, fullscreen view, and organized Library & Setlist.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "url": "https://chordyv.com"
+}
 </script>
+
 </body>
 </html>
